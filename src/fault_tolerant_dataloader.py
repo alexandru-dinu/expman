@@ -28,11 +28,11 @@ class CustomDataset(Dataset):
 
         return default_collate(good)
 
-    
+
 dataset = CustomDataset(...)
 dataloader = DataLoader(dataset, collate_fn=CustomDataset.collate, ...)
-      
-      
+
+
 for idx, batch in enumerate(dataloader):
     if batch is None:
         continue
