@@ -71,7 +71,7 @@ class Logger:
         self.name = name
 
         # get the logger object; keep it hidden as there's no need to directly access it
-        self.__logger = logging.getLogger(f"bagoftools.logger-{name}")
+        self.__logger = logging.getLogger(f"_logger-{name}")
         self.__logger.propagate = False
         self.setLevel(level.lower())
 
