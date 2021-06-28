@@ -1,5 +1,15 @@
 from toolz.itertoolz import take
-from typing import List, Any, Dict
+from typing import *
+
+
+def seed_everything(seed: Optional[int]) -> None:
+    # logger.info(f"Using {seed=}")
+    if seed is None:
+        return
+
+    random.seed(seed)
+    np.random.seed(seed)
+    T.manual_seed(seed)
 
 
 def split_data(data: List[Any], train_f: float, test_f: float) -> Dict[str, List[Any]]:
