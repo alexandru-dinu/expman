@@ -1,8 +1,7 @@
 import json
 import pickle
-
 from os import PathLike
-from typing import Any, Union, Iterable
+from typing import Any, Iterable, Union
 
 
 class Metadata:
@@ -21,6 +20,9 @@ class Metadata:
 
     def __len__(self):
         return len(self.__dict__)
+
+    def __getitem__(self, key: str) -> Any:
+        return self.__dict__[key]
 
     def _traverse(self, xs):
         if isinstance(xs, dict):
