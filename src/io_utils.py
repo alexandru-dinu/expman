@@ -1,7 +1,8 @@
 import json
-import os
 import pickle
-from typing import Any, Union
+
+from os import PathLike
+from typing import Any, Union, Iterable
 
 
 class Metadata:
@@ -58,7 +59,7 @@ class Metadata:
 def write_pickle(
     metadata: Metadata,
     body: Any,
-    path: Union[str, os.PathLike],
+    path: Union[str, PathLike],
 ) -> None:
     """
     Write an augmented pickle file containing both <metadata|body>.
@@ -69,7 +70,7 @@ def write_pickle(
 
 
 def read_pickle(
-    path: Union[str, os.PathLike],
+    path: Union[str, PathLike],
     get_metadata: bool,
     get_body: bool,
 ) -> Iterable[Union[Metadata, Any]]:
