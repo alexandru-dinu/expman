@@ -1,7 +1,7 @@
-import numpy as np
-
-from toolz.itertoolz import take
 from typing import *
+
+import numpy as np
+from toolz.itertoolz import take
 
 
 def seed_everything(seed: Optional[int]) -> None:
