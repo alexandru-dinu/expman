@@ -2,7 +2,7 @@ from unittest import TestCase
 
 import pytest
 
-import expman.io_utils as io_utils
+from expman.metadata import Metadata
 
 
 class TestLoader(TestCase):
@@ -13,7 +13,7 @@ class TestLoader(TestCase):
         pass
 
     def test_simple(self):
-        meta = io_utils.Metadata(foo="123", bar=[1, 2, 3])
+        meta = Metadata(foo="123", bar=[1, 2, 3])
 
         self.assertEqual(2, len(meta))
         self.assertIsInstance(meta.foo, str)
