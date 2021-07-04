@@ -5,7 +5,6 @@ from toolz.itertoolz import take
 
 
 def seed_everything(seed: Optional[int]) -> None:
-    # logger.info(f"Using {seed=}")
     if seed is None:
         return
 
@@ -37,7 +36,7 @@ def split_data(
 
 def batchify(xs: np.ndarray, bs: int, func: callable = None):
     """
-    Batchify @xs. If @func is not None, then the emitted item is func(batch).
+    Batchify `xs`. If `func` is not None, then the emitted item is `func(batch)`.
     """
     if not isinstance(bs, int) or not (1 <= bs <= len(xs)):
         raise ValueError(f"Batch size must be an int in [1, {xs.shape[0]}].")
