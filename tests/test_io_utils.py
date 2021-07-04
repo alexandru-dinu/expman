@@ -2,7 +2,7 @@ from unittest import TestCase
 
 import pytest
 
-import src.io_utils as io_utils
+import expman.io_utils as io_utils
 
 
 class TestLoader(TestCase):
