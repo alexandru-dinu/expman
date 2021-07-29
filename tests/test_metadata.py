@@ -1,6 +1,8 @@
 from unittest import TestCase
 
 import pytest
+from hypothesis import given, settings
+from hypothesis import strategies as st
 
 from expman.metadata import Metadata
 
@@ -27,3 +29,26 @@ class TestLoader(TestCase):
 
         with pytest.raises(AttributeError):
             _ = meta.nope
+
+
+    @given(
+        st.recursive(
+            base=st.dictionaries(
+                keys=st.text(min_size=1),
+                values=st.booleans() | st.floats() | st.integers() | st.text(),
+                min_size=1,
+            ),
+            extend=lambda children: st.dictionaries(
+                keys=st.text(min_size=1),
+                values=children,
+                min_size=1,
+            ),
+            max_leaves=10,
+        )
+    )
+    def test_random(self, d):
+        meta = Metadata(**d)
+
+        self.assertDictEqual(meta.to_dict(), d)
+
+
