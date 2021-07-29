@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 import pytest
-from hypothesis import given, settings
+from hypothesis import given
 from hypothesis import strategies as st
 
 from expman.metadata import Metadata
@@ -30,7 +30,6 @@ class TestLoader(TestCase):
         with pytest.raises(AttributeError):
             _ = meta.nope
 
-
     @given(
         st.recursive(
             base=st.dictionaries(
@@ -50,5 +49,3 @@ class TestLoader(TestCase):
         meta = Metadata(**d)
 
         self.assertDictEqual(meta.to_dict(), d)
-
-
