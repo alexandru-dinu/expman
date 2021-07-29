@@ -31,13 +31,13 @@ class Metadata:
 
         return xs
 
-    def _get_nested(self) -> dict:
+    def _get_nested(self, ds: dict) -> dict:
         out = {}
 
-        for k, v in self.__dict__.items():
+        for k, v in ds.items():
             # nested
             if isinstance(v, Metadata):
-                out[k] = "<self>" if v is self else self._get_nested(v)
+                out[k] = "<self>" if v is self else self._get_nested(v.__dict__)
 
             # non-primitive type, call its str method
             elif hasattr(v, "__dict__"):
@@ -53,4 +53,4 @@ class Metadata:
         return len(self) == 0
 
     def to_dict(self) -> dict:
-        return self._get_nested()
+        return self._get_nested(self.__dict__)
