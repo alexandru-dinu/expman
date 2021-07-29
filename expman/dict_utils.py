@@ -1,5 +1,5 @@
-from typing import *
 from functools import reduce
+from typing import *
 
 
 def flatten(obj: Dict[Any, Any], sep: str, name: str = None) -> Dict[str, Any]:
