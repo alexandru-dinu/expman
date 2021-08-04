@@ -66,7 +66,7 @@ ref_root.mkdir(exist_ok=True)
 def generate_references():
     def template(x: str) -> str:
         return "\n".join(
-            [f"{x}", "=" * len(x), '', f".. automodule :: {x}", f"{' ' * 3}:members:"]
+            [f"{x}", "=" * len(x), "", f".. automodule :: {x}", f"{' ' * 3}:members:"]
         )
 
     reference = [
