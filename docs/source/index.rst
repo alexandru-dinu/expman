@@ -10,6 +10,7 @@ Welcome to expman's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   reference.rst
 
 
 Indices and tables
