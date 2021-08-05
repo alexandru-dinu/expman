@@ -1,2 +1,2 @@
-sphinx
-furo
+mkdocs
+mkdocs-material

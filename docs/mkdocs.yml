@@ -1,0 +1,14 @@
+site_name: expman
+
+docs_dir: sources
+site_dir: build
+
+theme:
+  name: "material"
+  palette:
+    scheme: slate
+    primary: teal
+    accent: teal
+
+plugins:
+- search
