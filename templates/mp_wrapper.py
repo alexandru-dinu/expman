@@ -12,14 +12,14 @@ def _wrapper(x, **kwargs):
     """
     foo = kwargs.get("foo")
     bar = kwargs.get("bar")
-  
+
     try:
-        data = load(args.input_file_path)
+        data = load(cli_args.input_file_path)
         out = processing_func(x, data, foo, bar)
     except:
         logger.warning(...)
         out = {}
-    
+
     return x, out
 
 
@@ -31,7 +31,15 @@ def main():
         bar=bar,
     )
     work_args = [x for x in ...]
-    
+
     with mp.Pool(num_processes) as pool:
         for x, out in pool.imap_unordered(work_fn, work_args):
             ...
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    ...
+    cli_args = parser.parse_args()
+
+    main()
