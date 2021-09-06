@@ -4,7 +4,7 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from expman.metadata import Metadata
+from src.metadata import Metadata
 
 
 class TestLoader(TestCase):

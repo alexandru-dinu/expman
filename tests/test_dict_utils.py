@@ -3,7 +3,7 @@ from unittest import TestCase
 from hypothesis import HealthCheck, given, settings
 from hypothesis import strategies as st
 
-import expman.dict_utils as du
+import src.dict_utils as du
 
 
 class TestLoader(TestCase):

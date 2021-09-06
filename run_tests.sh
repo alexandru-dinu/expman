@@ -3,4 +3,4 @@
 PYTHONPATH=$PWD:$PYTHONPATH py.test \
     --exitfirst \
     --hypothesis-show-statistics \
-    expman/ tests/
+    src/ tests/
