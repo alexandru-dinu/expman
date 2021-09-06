@@ -1,5 +1,5 @@
 def main() -> None:
-    # use args
+    # use cli_args
     # use logging
     ...
 
@@ -7,7 +7,7 @@ def main() -> None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     ...
-    args = parser.parse_args()
+    cli_args = parser.parse_args()
 
     logger = setup_logging(...)
 
