@@ -1,9 +1,8 @@
-# argparse recipes
-
 import argparse
 import errno
 import os
 from pathlib import Path
+from typing import Union
 
 
 def path_ensure_exists(file_path: str) -> Path:
@@ -20,11 +19,11 @@ def path_ensure_exists(file_path: str) -> Path:
     return path
 
 
-def _nargs_example(x: str) -> int:
+def _nargs_example(x: str) -> Union[str, int]:
     """
     When applied to an arg with `nargs="+"`, this function is called for each value in arg.
     """
-    return [str(x), int(x)][ord(x) % 2]
+    return int(x) if ord(x) % 2 else str(x)
 
 
 if __name__ == "__main__":

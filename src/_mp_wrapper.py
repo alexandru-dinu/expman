@@ -1,8 +1,18 @@
+import argparse
+import functools
+from typing import Dict, List, NewType
+
+# example
+OutputType = NewType("OutputType", Dict[str, List[int]])
+
+
 def processing_func(x, data, foo, bar) -> OutputType:
     """
     This function does not know anything about CLI args.
     """
-    ...
+
+    out = {"foo": [1, 2, 3]}
+
     return out
 
 

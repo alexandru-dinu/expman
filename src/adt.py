@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from functools import singledispatch
-from typing import Union
+from typing import NoReturn, Union
 
 # from https://stackoverflow.com/a/64578832
 

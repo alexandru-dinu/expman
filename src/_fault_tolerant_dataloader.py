@@ -3,7 +3,7 @@ from torch.utils.data._utils.collate import default_collate
 
 
 class CustomDataset(Dataset):
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         # data init
         ...
 
@@ -30,7 +30,7 @@ class CustomDataset(Dataset):
 
 
 dataset = CustomDataset(...)
-dataloader = DataLoader(dataset, collate_fn=CustomDataset.collate, batch_size=...)
+dataloader = DataLoader(dataset, collate_fn=CustomDataset.collate)
 
 
 for idx, batch in enumerate(dataloader):
