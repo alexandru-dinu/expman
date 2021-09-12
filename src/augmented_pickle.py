@@ -16,7 +16,7 @@ def write_augmented_pickle(
         pickle.dump(body, fp)
 
 
-def read_pickle(
+def read_augmented_pickle(
     path: Union[str, PathLike],
     get_metadata: bool,
     get_body: bool,
@@ -27,6 +27,7 @@ def read_pickle(
     """
     with open(path, "rb") as fp:
         metadata = pickle.load(fp)
+
         if get_metadata:
             yield metadata
 

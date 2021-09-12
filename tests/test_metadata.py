@@ -1,10 +1,11 @@
+from collections.abc import Iterable
 from unittest import TestCase
 
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
-
-from src.metadata import Metadata
+from omegaconf import OmegaConf
+from omegaconf.errors import ConfigAttributeError, ConfigKeyError
 
 
 class TestLoader(TestCase):
@@ -15,19 +16,19 @@ class TestLoader(TestCase):
         pass
 
     def test_simple(self):
-        meta = Metadata(foo="123", bar=[1, 2, 3])
+        meta = OmegaConf.create({"foo": "123", "bar": [1, 2, 3]})
 
         self.assertEqual(2, len(meta))
         self.assertIsInstance(meta.foo, str)
-        self.assertIsInstance(meta.bar, list)
+        self.assertIsInstance(meta.bar, Iterable)
 
-        self.assertEqual("123", meta["foo"])
-        self.assertListEqual([1, 2, 3], meta["bar"])
+        self.assertTrue("123" == meta["foo"] == meta.foo)
+        self.assertTrue([1, 2, 3] == meta.bar)
 
-        with pytest.raises(KeyError):
+        with pytest.raises(ConfigKeyError):
             _ = meta["nope"]
 
-        with pytest.raises(AttributeError):
+        with pytest.raises(ConfigAttributeError):
             _ = meta.nope
 
     @given(
@@ -46,6 +47,6 @@ class TestLoader(TestCase):
         )
     )
     def test_random(self, d):
-        meta = Metadata(**d)
+        meta = OmegaConf.create(d)
 
-        self.assertDictEqual(meta.to_dict(), d)
+        self.assertDictEqual(OmegaConf.to_container(meta, resolve=True), d)
