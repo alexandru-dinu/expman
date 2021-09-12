@@ -30,7 +30,7 @@ class CustomDataset(Dataset):
 
 
 dataset = CustomDataset(...)
-dataloader = DataLoader(dataset, collate_fn=CustomDataset.collate, ...)
+dataloader = DataLoader(dataset, collate_fn=CustomDataset.collate, batch_size=...)
 
 
 for idx, batch in enumerate(dataloader):
