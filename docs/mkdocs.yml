@@ -1,4 +1,4 @@
-site_name: expman
+site_name: opskrift
 
 docs_dir: sources
 site_dir: build
@@ -7,8 +7,8 @@ theme:
   name: "material"
   palette:
     scheme: slate
-    primary: teal
-    accent: teal
+    primary: black
+    accent: red
 
 plugins:
 - search
