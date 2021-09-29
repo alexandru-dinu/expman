@@ -14,6 +14,9 @@ from src._argparse import path_ensure_exists
 
 
 def main():
+    if cli_args.seed is not None:
+        pl.utilities.seed.seed_everything(cli_args.seed, workers=True)
+
     model = MNISTModel(
         data_dir=cli_args.dataset_path,
         hidden_size=cli_args.hidden_size,
@@ -23,10 +26,15 @@ def main():
     )
     print(model)
 
+    tb_logger = pl.loggers.TensorBoardLogger(
+        "tb_logs", name="mnist", default_hp_metric=False
+    )
+
     trainer = pl.Trainer(
         gpus=(1 if cli_args.cuda else 0),
         max_epochs=cli_args.max_epochs,
         progress_bar_refresh_rate=20,
+        logger=tb_logger,
     )
     print(trainer)
 
@@ -35,6 +43,7 @@ def main():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
+    parser.add_argument("--seed", type=int, required=False)
     parser.add_argument("--batch_size", type=int, required=True)
     parser.add_argument("--learning_rate", type=float, required=False, default=0.001)
     parser.add_argument("--hidden_size", type=int, required=False, default=64)

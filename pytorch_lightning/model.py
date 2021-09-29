@@ -57,10 +57,16 @@ class MNISTModel(pl.LightningModule):
         x = self.model(x)
         return F.log_softmax(x, dim=1)
 
+    def on_train_start(self):
+        self.logger.log_hyperparams(self.hparams, {"hp/acc": 0})
+
     def training_step(self, batch, batch_idx):
         x, y = batch
         logits = self(x)
         loss = F.nll_loss(logits, y)
+
+        self.log("train_loss", loss, prog_bar=True)
+
         return loss
 
     def validation_step(self, batch, batch_idx):
@@ -70,9 +76,9 @@ class MNISTModel(pl.LightningModule):
         preds = T.argmax(logits, dim=1)
         acc = tmf.accuracy(preds, y)
 
-        # Calling self.log will surface up scalars for you in TensorBoard
         self.log("val_loss", loss, prog_bar=True)
         self.log("val_acc", acc, prog_bar=True)
+        self.log("hp/acc", acc, prog_bar=True)
 
         return loss
 

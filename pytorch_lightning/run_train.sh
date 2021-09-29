@@ -1,8 +1,9 @@
 #!/bin/bash
 
 python train.py \
-    --batch_size 512 \
-    --hidden_size 128 \
+    --seed 17 \
+    --batch_size 128 \
+    --hidden_size "$1" \
     --learning_rate 0.001 \
     --max_epochs 10 \
     --dataset_path ${HOME}/workspace/ml-data/ \
