@@ -1,4 +1,13 @@
-matplotlib
-seaborn
+# tools
 toolz
 omegaconf
+
+# data
+pandas
+matplotlib
+seaborn
+
+# pytorch
+tensorboard
+torchmetrics
+pytorch-lightning

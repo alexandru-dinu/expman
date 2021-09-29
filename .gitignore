@@ -1,5 +1,7 @@
 .vscode/
 
+lightning_logs/
+
 # mkdocs
 build/
 
