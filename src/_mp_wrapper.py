@@ -1,9 +1,9 @@
 import argparse
 import functools
-from typing import Dict, List, NewType
+from typing import Dict, List
 
 # example
-OutputType = NewType("OutputType", Dict[str, List[int]])
+OutputType = Dict[str, List[int]]
 
 
 def processing_func(x, data, foo, bar) -> OutputType:

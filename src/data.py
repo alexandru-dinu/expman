@@ -53,9 +53,6 @@ def batchify(
     if not isinstance(batch_size, int) or not (1 <= batch_size <= len(data)):
         raise ValueError(f"Batch size must be an int in [1, {data.shape[0]}].")
 
-    if not isinstance(data, np.ndarray):
-        data = np.array(data)
-
     if func is None:
         func = lambda x: x
 
