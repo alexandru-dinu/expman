@@ -3,12 +3,30 @@ site_name: opskrift
 docs_dir: sources
 site_dir: build
 
+repo_url: https://github.com/opskrift/opskrift
+
 theme:
   name: "material"
+
   palette:
-    scheme: slate
-    primary: black
-    accent: red
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: black
+      accent: red
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: red
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+
+  icon:
+    repo: fontawesome/brands/github
 
 plugins:
-- search
+  - search
