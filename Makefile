@@ -9,6 +9,10 @@ format:
 typecheck:
 	mypy src/ pytorch_lightning/ tests/
 
+build-docs:
+	python3 docs/gen_references.py
+	mkdocs build --config-file docs/mkdocs.yml
+
 clean:
 	rm -rfv **/__pycache__ && echo
 	rm -rfv **/.ipynb_checkpoints && echo

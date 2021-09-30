@@ -4,6 +4,7 @@ docs_dir: sources
 site_dir: build
 
 repo_url: https://github.com/opskrift/opskrift
+repo_name: opskrift/opskrift
 
 theme:
   name: "material"
@@ -29,4 +30,10 @@ theme:
     repo: fontawesome/brands/github
 
 plugins:
-  - search
+- search
+- mkdocstrings:
+    default_handler: python
+    handlers:
+      python:
+        rendering:
+          show_source: true
