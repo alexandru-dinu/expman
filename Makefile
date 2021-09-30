@@ -7,7 +7,7 @@ format:
 	black **/*.py
 
 typecheck:
-	mypy src/
+	mypy src/ pytorch_lightning/ tests/
 
 clean:
 	rm -rfv **/__pycache__ && echo

@@ -19,7 +19,7 @@ class TestLoader(TestCase):
         self.assertDictEqual(m2.__dict__, {"x": 1, "y": 2, "z": "hello"})
 
         # don't need to specify args / kwargs, since m1 already provides the instance
-        m3 = MyClass()  # type: ignore
+        m3 = MyClass()
         print(f"{m3.__dict__=}")  # {'x': 1, 'y': 2, 'z': 'hello'}
         self.assertDictEqual(m3.__dict__, {"x": 1, "y": 2, "z": "hello"})
 

@@ -1,32 +1,3 @@
-"""
-Suppose you have some input data sources `data_in` on which you apply some process `F` parameterized by `args`:
-
-    data_out = F(data_in, args)
-
-You want to serialize `data_out`, but also don't want to lose `args`,
-to preserve the exact setup that generated the output data.
-
-Now suppose you want to inspect `args` for a particular `data_out`:
-- Saving both `{"data": data_out, "args": args}` may not be a viable solution,
-as `data_out` needs to be fully loaded into memory without actually needing it.
-- Saving `data_out` and `args` separately necessitates extra care to keep them tied together.
-
-Solution: define a simple data format -- *augmented pickle*
-
-    <metadata>
-    <body (actual data)>
-
-Pickle both objects, but read body on-demand:
-
-    res = read_augmented_pickle("./data.apkl", get_metadata=True, get_body=True)
-
-    # get metadata (body is not loaded)
-    meta = next(res)
-
-    # query the generator again to get body (data)
-    data = next(res)
-"""
-
 from datetime import datetime
 from unittest import TestCase
 
@@ -45,7 +16,7 @@ class TestLoader(TestCase):
         meta.input_path = "/foo/bar/baz.apkl"
         meta.generated_on = int(datetime.now().timestamp())
 
-        b, n = meta.params.shape
+        b, n = meta.params["shape"]
 
         data = {
             "train": np.random.uniform(0, 1, size=(b, n)),
@@ -53,19 +24,19 @@ class TestLoader(TestCase):
             "valid": np.random.uniform(0, 1, size=(b, n)),
         }
 
-        meta = OmegaConf.to_container(meta, resolve=True)
+        meta_dict = OmegaConf.to_container(meta, resolve=True)
 
         write_augmented_pickle(
-            metadata=meta,
+            metadata=meta_dict,
             body=data,
             path=path,
         )
-        return meta, data
+        return meta_dict, data
 
     @staticmethod
     def load(path):
         # generator containing (metadata, body)
-        res = read_augmented_pickle(path, get_metadata=True, get_body=True)
+        res = read_augmented_pickle(path, get_body=True)
 
         # get metadata (body is not loaded)
         meta = next(res)

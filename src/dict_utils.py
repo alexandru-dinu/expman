@@ -3,9 +3,7 @@ from typing import Any, Dict, List, Tuple
 
 
 def flatten(obj: MutableMapping, sep: str, name: str = None) -> MutableMapping:
-    """
-    Flatten dictionary by combining nested keys with given separator.
-    """
+    """Flatten dictionary by combining nested keys with given separator."""
     items: List[Tuple[str, Any]] = []
 
     for k, v in obj.items():
@@ -19,9 +17,7 @@ def flatten(obj: MutableMapping, sep: str, name: str = None) -> MutableMapping:
 
 
 def unflatten(obj: Dict[str, Any], sep: str) -> Dict[Any, Any]:
-    """
-    Construct a nested dictionary by splitting keys on given separator.
-    """
+    """Construct a nested dictionary by splitting keys on given separator."""
     out: Dict[str, Any] = {}
 
     for key, value in obj.items():

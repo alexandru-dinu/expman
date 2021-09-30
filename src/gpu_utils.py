@@ -5,10 +5,7 @@ import numpy as np
 
 
 def get_first_available_gpu_id(limit: int) -> Optional[int]:
-    """
-    Returns the ID of the first GPU with memory usage <= limit
-    or None if no GPU could be found.
-    """
+    """Returns the ID of the first GPU with memory usage <= limit or `None` if no GPU could be found."""
     result = subprocess.check_output(
         ["nvidia-smi", "--query-gpu=memory.used", "--format=csv,nounits,noheader"],
         encoding="utf-8",

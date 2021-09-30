@@ -10,7 +10,7 @@ import pytorch_lightning as pl
 # TODO: maybe extract useful code into a package?
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from src._argparse import path_ensure_exists
+from src.config_utils import args_path_ensure_exists
 
 
 def main():
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     parser.add_argument("--learning_rate", type=float, required=False, default=0.001)
     parser.add_argument("--hidden_size", type=int, required=False, default=64)
     parser.add_argument("--max_epochs", type=int, required=True)
-    parser.add_argument("--dataset_path", type=path_ensure_exists, required=True)
+    parser.add_argument("--dataset_path", type=args_path_ensure_exists, required=True)
     parser.add_argument(
         "--num_workers",
         type=int,
