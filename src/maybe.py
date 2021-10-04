@@ -33,7 +33,7 @@ class Maybe:
         Call `func` on the wrapped value, storing and propagating the exception if any.
         This has the effect of "fail-on-first-error".
 
-        Similar to Haskell's (>>=) :: Monad m => m a -> (a -> m b) -> m b
+        Similar to Haskell's `(>>=) :: Monad m => m a -> (a -> m b) -> m b`
         """
         if self.value is None:
             return self

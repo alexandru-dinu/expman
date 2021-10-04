@@ -1,18 +1,33 @@
+"""
+Simple example of Abstract Data Types in Python.
+
+In Haskell we would write:
+
+    data Result = OK Int | Failure String
+
+In Python we can do:
+
+    Result = Union[OK, Failure]
+
+where `OK` and `Failure` are frozen dataclasses.
+"""
+
 from dataclasses import dataclass
 from typing import Union
 
 
-@dataclass(frozen=True)  # OK Int
+# OK Int
+@dataclass(frozen=True)
 class OK:
     result: int
 
 
-@dataclass(frozen=True)  # Failure String
+# Failure String
+@dataclass(frozen=True)
 class Failure:
     msg: str
 
 
-# data Result = OK Int | Failure String
 Result = Union[OK, Failure]
 
 
