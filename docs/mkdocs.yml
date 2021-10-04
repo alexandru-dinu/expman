@@ -9,6 +9,10 @@ repo_name: opskrift/opskrift
 theme:
   name: "material"
 
+  # prevent typefaces from being loaded from Google Fonts
+  # and fall back to system font
+  font: false
+
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
