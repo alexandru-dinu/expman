@@ -7,7 +7,7 @@ format:
 	black **/*.py
 
 typecheck:
-	mypy src/ pytorch_lightning/ tests/
+	mypy src/ pytorch-lightning/ tests/
 
 build-docs:
 	python3 docs/gen_references.py
