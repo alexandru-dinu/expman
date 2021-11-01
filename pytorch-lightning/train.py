@@ -2,9 +2,8 @@ import argparse
 import sys
 from pathlib import Path
 
-from model import MNISTModel
-
 import pytorch_lightning as pl
+from model import MNISTModel
 
 # add top level src/ dir to path
 # TODO: maybe extract useful code into a package?

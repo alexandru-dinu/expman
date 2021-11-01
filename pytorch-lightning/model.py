@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import pytorch_lightning as pl
 import torch as T
 import torch.nn as nn
 import torch.nn.functional as F
@@ -7,8 +8,6 @@ import torchmetrics.functional as tmf
 import torchvision
 import torchvision.transforms as transforms
 from torch.utils.data import DataLoader, random_split
-
-import pytorch_lightning as pl
 
 
 class MNISTModel(pl.LightningModule):
