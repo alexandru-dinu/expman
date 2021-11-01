@@ -10,6 +10,8 @@ typecheck:
 	mypy src/ pytorch-lightning/ tests/
 
 build-docs:
+	rm -rfv docs/sources/reference
+	rm -rfv docs/sources/template
 	python3 docs/gen_references.py
 	mkdocs build --config-file docs/mkdocs.yml
 
