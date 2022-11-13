@@ -16,6 +16,7 @@ build-docs:
 	rm -rfv docs/sources/template
 	python3 docs/gen_references.py
 	mkdocs build --config-file docs/mkdocs.yml
+	(cd docs/build && git add ./ && git commit -m "Rebuild site." && git push -u origin site)
 
 clean:
 	rm -rf **/__pycache__
