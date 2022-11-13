@@ -33,9 +33,7 @@ class _Formatter(logging.Formatter):
     def _process(msg, loglevel, colorize):
         loglevel = str(loglevel).lower()
         if loglevel not in LOG_LEVELS:
-            raise RuntimeError(
-                f"{loglevel} should be one of {LOG_LEVELS}."
-            )  # pragma: no cover
+            raise RuntimeError(f"{loglevel} should be one of {LOG_LEVELS}.")  # pragma: no cover
 
         msg = f"{str(loglevel).upper()}: {str(msg)}"
 
@@ -47,17 +45,11 @@ class _Formatter(logging.Formatter):
         if loglevel == INFO:
             return "{}{}{}".format(fg(4), msg, attr(0))  # noqa: E501
         if loglevel == WARNING:
-            return "{}{}{}{}{}".format(
-                fg(214), attr(1), msg, attr(21), attr(0)
-            )  # noqa: E501
+            return "{}{}{}{}{}".format(fg(214), attr(1), msg, attr(21), attr(0))  # noqa: E501
         if loglevel == ERROR:
-            return "{}{}{}{}{}".format(
-                fg(202), attr(1), msg, attr(21), attr(0)
-            )  # noqa: E501
+            return "{}{}{}{}{}".format(fg(202), attr(1), msg, attr(21), attr(0))  # noqa: E501
         if loglevel == CRITICAL:
-            return "{}{}{}{}{}".format(
-                fg(196), attr(1), msg, attr(21), attr(0)
-            )  # noqa: E501
+            return "{}{}{}{}{}".format(fg(196), attr(1), msg, attr(21), attr(0))  # noqa: E501
 
     def format(self, record):
         record = copy(record)

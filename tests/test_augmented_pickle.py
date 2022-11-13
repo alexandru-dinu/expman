@@ -1,4 +1,5 @@
 from datetime import datetime
+from pathlib import Path
 
 import numpy as np
 from omegaconf import OmegaConf
@@ -6,7 +7,7 @@ from omegaconf import OmegaConf
 from opskrift.augmented_pickle import read_augmented_pickle, write_augmented_pickle
 
 
-def dump(path: str):
+def dump(path: Path):
     meta = OmegaConf.create()
 
     meta.params = {"margin": 1.0, "distance": "euclidean", "shape": (8, 128)}
@@ -31,7 +32,7 @@ def dump(path: str):
     return meta_dict, data
 
 
-def load(path):
+def load(path: Path):
     # generator containing (metadata, body)
     res = read_augmented_pickle(path, get_body=True)
 
@@ -44,10 +45,9 @@ def load(path):
     return meta, data
 
 
-def test_dump_and_load():
-    path = "/tmp/foo.apkl"
-    meta1, data1 = dump(path)
-    meta2, data2 = load(path)
+def test_dump_and_load(tmp_path: Path):
+    meta1, data1 = dump(tmp_path / "foo.pkl")
+    meta2, data2 = load(tmp_path / "foo.pkl")
 
     assert meta1 == meta2
 

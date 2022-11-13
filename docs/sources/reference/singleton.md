@@ -1,1 +1,1 @@
-::: src.singleton
+::: opskrift.singleton

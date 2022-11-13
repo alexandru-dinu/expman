@@ -1,1 +1,1 @@
-::: src.gpu_utils
+::: opskrift.gpu_utils

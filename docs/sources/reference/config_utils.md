@@ -1,1 +1,1 @@
-::: src.config_utils
+::: opskrift.config_utils

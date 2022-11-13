@@ -1,1 +1,1 @@
-::: src.viz
+::: opskrift.viz

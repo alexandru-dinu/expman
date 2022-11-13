@@ -59,9 +59,7 @@ if __name__ == "__main__":
     import numpy as np
 
     out = (
-        Maybe.unit(np.array([1, 2, 3]))
-        .bind(lambda x: x * 0.5)
-        .bind(lambda x: x.median())
+        Maybe.unit(np.array([1, 2, 3])).bind(lambda x: x * 0.5).bind(lambda x: x.median())
     ).unwrap()
     print(f"{type(out)}: {out}")
 

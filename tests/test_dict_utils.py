@@ -1,25 +1,16 @@
-from hypothesis import HealthCheck, given, settings
+from __future__ import annotations
+
+from typing import Any
+
+from hypothesis import given
 from hypothesis import strategies as st
 
 import opskrift.dict_utils as du
+from tests.utils import build_tree
 
 
-@settings(suppress_health_check=(HealthCheck.too_slow,))
-@given(
-    st.recursive(
-        base=st.dictionaries(
-            keys=st.text(min_size=1, max_size=1024).filter(lambda k: "/" not in k),
-            values=st.booleans() | st.floats() | st.integers() | st.text(),
-            min_size=1,
-        ),
-        extend=lambda children: st.dictionaries(
-            keys=st.text(min_size=1, max_size=1024).filter(lambda k: "/" not in k),
-            values=children,
-            min_size=1,
-        ),
-        max_leaves=10,
-    )
-)
-def test_flatten_unflatten(obj: dict):
+@given(st.lists(st.booleans() | st.floats() | st.integers() | st.text(), min_size=0, max_size=1024))
+def test_flatten_unflatten(xs: list[Any]):
+    tree = build_tree(xs)
     sep = "/"
-    assert obj == du.unflatten(du.flatten(obj, sep), sep)
+    assert tree == du.unflatten(du.flatten(tree, sep), sep)

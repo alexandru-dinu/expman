@@ -1,1 +1,1 @@
-::: src.augmented_pickle
+::: opskrift.augmented_pickle

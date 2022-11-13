@@ -1,10 +1,15 @@
+from __future__ import annotations
+
 from collections.abc import Iterable
+from typing import Any
 
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 from omegaconf import OmegaConf
 from omegaconf.errors import ConfigAttributeError, ConfigKeyError
+
+from tests.utils import build_tree
 
 
 def test_simple():
@@ -24,22 +29,8 @@ def test_simple():
         _ = meta.nope
 
 
-@given(
-    st.recursive(
-        base=st.dictionaries(
-            keys=st.text(min_size=1),
-            values=st.booleans() | st.floats() | st.integers() | st.text(),
-            min_size=1,
-        ),
-        extend=lambda children: st.dictionaries(
-            keys=st.text(min_size=1),
-            values=children,
-            min_size=1,
-        ),
-        max_leaves=10,
-    )
-)
-def test_random(d):
-    meta = OmegaConf.create(d)
-
-    assert d == OmegaConf.to_container(meta, resolve=True)
+@given(st.lists(st.booleans() | st.floats() | st.integers() | st.text(), min_size=0, max_size=1024))
+def test_random(xs: list[Any]):
+    tree = build_tree(xs)
+    meta = OmegaConf.create(tree)
+    assert tree == OmegaConf.to_container(meta, resolve=True)

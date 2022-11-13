@@ -9,10 +9,10 @@ def flatten(obj: dict[str, Any], sep: str, name: str | None = None) -> dict[str,
 
     for k, v in obj.items():
         new_key = f"{name}{sep}{k}" if name else k
-        if isinstance(v, dict):
-            items.extend(flatten(v, sep=sep, name=new_key).items())
-        else:
+        if not isinstance(v, dict) or len(v) == 0:
             items.append((new_key, v))
+        else:
+            items.extend(flatten(v, sep=sep, name=new_key).items())
 
     return dict(items)
 

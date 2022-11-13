@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def stem_hist(xs: np.ndarray, show_now=True, linefmt="C0-", markerfmt="C0o") -> None:
+def stem_hist(xs: np.ndarray, *, show_now=True, linefmt="C0-", markerfmt="C0o") -> None:
     x, f = np.unique(xs, return_counts=True)
     f = f / f.sum()
 

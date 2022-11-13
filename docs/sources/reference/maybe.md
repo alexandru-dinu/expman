@@ -1,1 +1,1 @@
-::: src.maybe
+::: opskrift.maybe

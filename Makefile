@@ -5,8 +5,8 @@ test:
 
 format:
 	@poetry run autoflake --remove-all-unused-imports -i $(SRC)
-	@poetry run isort opskrift/ tests/ $(SRC)
-	@poetry run black opskrift/ tests/ $(SRC)
+	@poetry run isort $(SRC)
+	@poetry run black --line-length 100 $(SRC)
 
 typecheck:
 	@poetry run mypy opskrift/ tests/

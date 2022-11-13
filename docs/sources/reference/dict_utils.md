@@ -1,1 +1,1 @@
-::: src.dict_utils
+::: opskrift.dict_utils

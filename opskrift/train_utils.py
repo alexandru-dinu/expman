@@ -1,23 +1,24 @@
 from __future__ import annotations
 
 import math
-from typing import Any, Callable, Dict, Iterator, List
+from typing import Any, Callable, Iterator
 
 import numpy as np
 from toolz import itertoolz
 
 
-def get_cosine_learning_rates(lr_min: float, lr_max: float, f: float, N: int):
-    """Decay the learning rate based on a cosine schedule of frequency `f`.
+def get_cosine_learning_rates(
+    lr_min: float, lr_max: float, freq: float, num_points: int
+) -> list[float]:
+    """Decay the learning rate based on a cosine schedule of frequency `freq`.
     Returns a list of `N` learning rate values in the interval `[lr_min, lr_max]`.
     """
     lr = []
 
-    for i in range(N):
-        freq = f * i / N
+    for i in range(num_points):
+        freq = freq * i / num_points
         scaler = 0.5 * (1 + math.cos(2 * math.pi * freq))  # [0, 1]
-        l = lr_min + scaler * (lr_max - lr_min)
-        lr.append(l)
+        lr.append(lr_min + scaler * (lr_max - lr_min))
 
     return lr
 
@@ -32,8 +33,8 @@ def batchify(
     Args:
         data (np.ndarray): NumPy array of items to batchify.
         batch_size (int): Batch size; must be between 1 and `len(data)`.
-        func (Callable[[np.ndarray], np.ndarray], optional): Optional function to apply to each emitted batch.
-            Defaults to identity function.
+        func (Callable[[np.ndarray], np.ndarray], optional): Optional function to apply
+            to each emitted batch. Defaults to identity function.
 
     Returns:
         Iterator[np.ndarray]: Generator object containing batches.
@@ -50,20 +51,20 @@ def batchify(
 
 
 def split_data(
-    data: List[Any], train_f: float, test_f: float, shuffle: bool = False
-) -> Dict[str, List[Any]]:
+    data: list[Any], train_f: float, test_f: float, shuffle: bool = False
+) -> dict[str, list[Any]]:
     """Get `train / test / valid` splits from `data`.
     If `shuffle` is True, then use a random permutation of `data`.
     `valid` split size is given by `(1 - train_f - test_f) * len(data)`.
 
     Args:
-        data (List[Any]): Any collection of items to be split.
+        data (list[Any]): Any collection of items to be split.
         train_f (float): Train size factor from the entire length (must be between 0 and 1).
         test_f (float): Test size factor from the entire length (must be between 0 and 1).
         shuffle (bool): Whether to use a random permutation of `data`.
 
     Returns:
-        Dict[str, List[Any]]: Keys are {train, test, valid}, and values are corresponding splits
+        dict[str, list[Any]]: Keys are {train, test, valid}, and values are corresponding splits
     """
     n = len(data)
 
@@ -82,6 +83,6 @@ def split_data(
 
 
 if __name__ == "__main__":
-    lrs = get_cosine_learning_rates(lr_min=1e-5, lr_max=1e-3, f=2, N=100)
+    lrs = get_cosine_learning_rates(lr_min=1e-5, lr_max=1e-3, freq=2, num_points=100)
     for lr in lrs:
         print(f"{lr:.7f}")

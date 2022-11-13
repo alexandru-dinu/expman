@@ -1,1 +1,1 @@
-::: src._fault_tolerant_dataloader
+::: templates._fault_tolerant_dataloader

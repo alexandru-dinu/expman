@@ -1,5 +1,6 @@
 """
-Suppose you have some input data sources `data_in` on which you apply some process `F` parameterized by `args`:
+Suppose you have some input data sources `data_in`
+on which you apply some process `F` parameterized by `args`:
 
     data_out = F(data_in, args)
 
@@ -27,16 +28,17 @@ Pickle both objects, but read body on-demand:
     data = next(res)
 """
 
+from __future__ import annotations
 
 import pickle
 from os import PathLike
-from typing import Any, Iterable, Union
+from typing import Any, Iterable
 
 
 def write_augmented_pickle(
     metadata: Any,
     body: Any,
-    path: Union[str, PathLike],
+    path: str | PathLike,
 ) -> None:
     """Write an augmented pickle file containing `metadata` and `body`."""
     with open(path, "wb") as fp:
@@ -45,7 +47,7 @@ def write_augmented_pickle(
 
 
 def read_augmented_pickle(
-    path: Union[str, PathLike],
+    path: str | PathLike,
     get_body: bool,
 ) -> Iterable[Any]:
     """Read an augmented pickle file containing `metadata` and `body`.

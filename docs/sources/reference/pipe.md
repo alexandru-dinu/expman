@@ -1,1 +1,1 @@
-::: src.pipe
+::: opskrift.pipe

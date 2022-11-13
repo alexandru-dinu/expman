@@ -1,1 +1,1 @@
-::: src.logger
+::: opskrift.logger
