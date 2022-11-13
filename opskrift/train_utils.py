@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import math
 from typing import Any, Callable, Dict, Iterator, List
 
@@ -21,7 +23,9 @@ def get_cosine_learning_rates(lr_min: float, lr_max: float, f: float, N: int):
 
 
 def batchify(
-    data: np.ndarray, batch_size: int, func: Callable[[np.ndarray], np.ndarray] = None
+    data: np.ndarray,
+    batch_size: int,
+    func: Callable[[np.ndarray], np.ndarray] | None = None,
 ) -> Iterator[np.ndarray]:
     """Batchify `data`. If `func` is not None, then the emitted item is `func(batch)`.
 

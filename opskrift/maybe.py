@@ -1,8 +1,9 @@
+from __future__ import annotations
+
 from typing import *
 
 """
 Maybe Monad
-
 https://stackoverflow.com/questions/28607666/maybe-monad-in-python-with-method-chaining
 """
 
@@ -10,7 +11,7 @@ https://stackoverflow.com/questions/28607666/maybe-monad-in-python-with-method-c
 a = TypeVar("a")
 b = TypeVar("b")
 
-# TODO: make this mean Optional[a]
+
 class Maybe:
     def __init__(self, value: Optional[a], err: Optional[Exception] = None):
         self.value = value
@@ -20,7 +21,7 @@ class Maybe:
     def unit(cls, *args, **kwargs) -> "Maybe":
         return cls(*args, **kwargs)
 
-    def unwrap(self) -> Union[a, Exception]:
+    def unwrap(self) -> a | Exception:
         if self.value is not None:
             assert self.err is None
             return self.value
@@ -28,7 +29,7 @@ class Maybe:
             assert self.err is not None
             return self.err
 
-    def bind(self, func: Callable[[a], Optional[b]]) -> Optional[b]:
+    def bind(self, func: Callable) -> "Maybe":
         """
         Call `func` on the wrapped value, storing and propagating the exception if any.
         This has the effect of "fail-on-first-error".

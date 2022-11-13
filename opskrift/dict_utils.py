@@ -1,14 +1,15 @@
-from collections.abc import MutableMapping
-from typing import Any, Dict, List, Tuple
+from __future__ import annotations
+
+from typing import Any
 
 
-def flatten(obj: MutableMapping, sep: str, name: str = None) -> MutableMapping:
+def flatten(obj: dict[str, Any], sep: str, name: str | None = None) -> dict[str, Any]:
     """Flatten dictionary by combining nested keys with given separator."""
-    items: List[Tuple[str, Any]] = []
+    items: list[tuple[str, Any]] = []
 
     for k, v in obj.items():
-        new_key = name + sep + k if name else k
-        if isinstance(v, MutableMapping):
+        new_key = f"{name}{sep}{k}" if name else k
+        if isinstance(v, dict):
             items.extend(flatten(v, sep=sep, name=new_key).items())
         else:
             items.append((new_key, v))
@@ -16,9 +17,9 @@ def flatten(obj: MutableMapping, sep: str, name: str = None) -> MutableMapping:
     return dict(items)
 
 
-def unflatten(obj: Dict[str, Any], sep: str) -> Dict[Any, Any]:
+def unflatten(obj: dict[str, Any], sep: str) -> dict[str, Any]:
     """Construct a nested dictionary by splitting keys on given separator."""
-    out: Dict[str, Any] = {}
+    out: dict[str, Any] = {}
 
     for key, value in obj.items():
         *init, last = key.split(sep)

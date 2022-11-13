@@ -1,57 +1,55 @@
 from datetime import datetime
-from unittest import TestCase
 
 import numpy as np
 from omegaconf import OmegaConf
 
-from src.augmented_pickle import read_augmented_pickle, write_augmented_pickle
+from opskrift.augmented_pickle import read_augmented_pickle, write_augmented_pickle
 
 
-class TestLoader(TestCase):
-    @staticmethod
-    def dump(path: str):
-        meta = OmegaConf.create()
+def dump(path: str):
+    meta = OmegaConf.create()
 
-        meta.params = {"margin": 1.0, "distance": "euclidean", "shape": (8, 128)}
-        meta.input_path = "/foo/bar/baz.apkl"
-        meta.generated_on = int(datetime.now().timestamp())
+    meta.params = {"margin": 1.0, "distance": "euclidean", "shape": (8, 128)}
+    meta.input_path = "/foo/bar/baz.apkl"
+    meta.generated_on = int(datetime.now().timestamp())
 
-        b, n = meta.params["shape"]
+    b, n = meta.params["shape"]
 
-        data = {
-            "train": np.random.uniform(0, 1, size=(b, n)),
-            "test": np.random.uniform(0, 1, size=(b, n)),
-            "valid": np.random.uniform(0, 1, size=(b, n)),
-        }
+    data = {
+        "train": np.random.uniform(0, 1, size=(b, n)),
+        "test": np.random.uniform(0, 1, size=(b, n)),
+        "valid": np.random.uniform(0, 1, size=(b, n)),
+    }
 
-        meta_dict = OmegaConf.to_container(meta, resolve=True)
+    meta_dict = OmegaConf.to_container(meta, resolve=True)
 
-        write_augmented_pickle(
-            metadata=meta_dict,
-            body=data,
-            path=path,
-        )
-        return meta_dict, data
+    write_augmented_pickle(
+        metadata=meta_dict,
+        body=data,
+        path=path,
+    )
+    return meta_dict, data
 
-    @staticmethod
-    def load(path):
-        # generator containing (metadata, body)
-        res = read_augmented_pickle(path, get_body=True)
 
-        # get metadata (body is not loaded)
-        meta = next(res)
+def load(path):
+    # generator containing (metadata, body)
+    res = read_augmented_pickle(path, get_body=True)
 
-        # if body is needed, query the generator again
-        data = next(res)
+    # get metadata (body is not loaded)
+    meta = next(res)
 
-        return meta, data
+    # if body is needed, query the generator again
+    data = next(res)
 
-    def test_dump_and_load(self):
-        path = "/tmp/foo.apkl"
-        meta1, data1 = self.dump(path)
-        meta2, data2 = self.load(path)
+    return meta, data
 
-        self.assertDictEqual(meta1, meta2)
 
-        for k in data1.keys():
-            self.assertTrue(np.allclose(data1[k], data2[k]))
+def test_dump_and_load():
+    path = "/tmp/foo.apkl"
+    meta1, data1 = dump(path)
+    meta2, data2 = load(path)
+
+    assert meta1 == meta2
+
+    for k in data1.keys():
+        assert np.allclose(data1[k], data2[k])

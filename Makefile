@@ -1,13 +1,15 @@
+SRC := $(shell find {opskrift,tests} -name "*.py")
+
 test:
-	PYTHONPATH=. pytest --exitfirst --hypothesis-show-statistics src/ tests/ -vv
+	@poetry run pytest --exitfirst --hypothesis-show-statistics
 
 format:
-	autoflake --remove-all-unused-imports -i **/*.py
-	isort **/*.py
-	black **/*.py
+	@poetry run autoflake --remove-all-unused-imports -i $(SRC)
+	@poetry run isort opskrift/ tests/ $(SRC)
+	@poetry run black opskrift/ tests/ $(SRC)
 
 typecheck:
-	mypy src/ pytorch-lightning/ tests/
+	@poetry run mypy opskrift/ tests/
 
 build-docs:
 	rm -rfv docs/sources/reference
@@ -16,7 +18,8 @@ build-docs:
 	mkdocs build --config-file docs/mkdocs.yml
 
 clean:
-	rm -rfv **/__pycache__ && echo
-	rm -rfv **/.ipynb_checkpoints && echo
-	rm -rfv **/.mypy_cache && echo
-	rm -rfv **/.hypothesis && echo
+	rm -rf **/__pycache__
+	rm -rf **/.ipynb_checkpoints
+	rm -rf .mypy_cache
+	rm -rf .hypothesis
+	rm -rf .pytest_cache
