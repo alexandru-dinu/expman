@@ -1,15 +1,15 @@
 [tool.poetry]
 name = "opskrift"
 version = "0.1.0"
-description = ""
+description = "Collection of Python recipes mostly tailored for ML."
 authors = ["Alexandru Dinu <alex.dinu07@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 toolz = "^0.12.0"
 omegaconf = "^2.2.3"
-pandas = "^1.5.1"
+pandas = "^2.0.0"
 numpy = "^1.23.4"
 matplotlib = "^3.6.2"
 seaborn = "^0.12.1"
@@ -25,9 +25,19 @@ mkdocs = "^1.4.2"
 mkdocstrings = "^0.19.0"
 mkdocs-material = "^8.5.10"
 mkdocstrings-python = "^0.8.0"
+ruff = "^0.0.270"
 
-[virtualenvs]
-in-project = true
+[tool.ruff]
+select = [
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "F", # pyflakes
+    "C", # flake8-comprehensions
+    "B", # flake8-bugbear
+]
+ignore = [
+    "E501",  # line too long, handled by black
+]
 
 [build-system]
 requires = ["poetry-core"]

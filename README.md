@@ -7,8 +7,4 @@
 
 Collection of Python recipes mostly tailored for ML.
 
-Scripts that start with an underscore denote recipes or templates (e.g. [`_fault_tolerant_dataloader.py`](https://github.com/opskrift/opskrift/blob/main/src/_fault_tolerant_dataloader.py)).
-
 For self-contained examples that can be tested, the code is under [`tests/`](https://github.com/opskrift/opskrift/tree/main/tests).
-
-For instance, [`test_augmented_pickle.py`](https://github.com/opskrift/opskrift/blob/main/tests/test_augmented_pickle.py) demonstrates and tests a simple scenario for serializing data along with a metadata header.

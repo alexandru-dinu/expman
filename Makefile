@@ -1,7 +1,10 @@
-SRC := $(shell find {opskrift,tests} -name "*.py")
+SRC := $(shell find {opskrift,tests,references} -name "*.py")
 
 test:
 	@poetry run pytest --exitfirst --hypothesis-show-statistics
+
+lint:
+	@poetry run ruff check $(SRC)
 
 format:
 	@poetry run autoflake --remove-all-unused-imports -i $(SRC)
@@ -14,8 +17,8 @@ typecheck:
 build-docs:
 	rm -rfv docs/sources/reference
 	rm -rfv docs/sources/template
-	python3 docs/gen_references.py
-	mkdocs build --config-file docs/mkdocs.yml
+	poetry run python3 docs/gen_references.py
+	poetry run mkdocs build --config-file docs/mkdocs.yml
 	(cd docs/build && git add ./ && git commit -m "Rebuild site." && git push -u origin site)
 
 clean:
