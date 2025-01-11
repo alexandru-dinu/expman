@@ -1,1 +1,0 @@
-::: opskrift.gpu_utils

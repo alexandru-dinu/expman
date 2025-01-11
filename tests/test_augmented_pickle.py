@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 from omegaconf import OmegaConf
 
-from opskrift.augmented_pickle import read_augmented_pickle, write_augmented_pickle
+from ml_recipes.augmented_pickle import read_augmented_pickle, write_augmented_pickle
 
 
 def dump(path: Path):

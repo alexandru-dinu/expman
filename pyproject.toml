@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "opskrift"
+name = "ml-recipes"
 version = "0.1.0"
 description = "Collection of Python recipes mostly tailored for ML."
 authors = ["Alexandru Dinu <alex.dinu07@gmail.com>"]

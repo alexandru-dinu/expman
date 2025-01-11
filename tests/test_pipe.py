@@ -3,7 +3,7 @@ import hypothesis.strategies as st
 import numpy as np
 from hypothesis import given
 
-from opskrift.pipe import EnterPipe, ExitPipe
+from ml_recipes.pipe import EnterPipe, ExitPipe
 
 
 @given(

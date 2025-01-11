@@ -1,4 +1,4 @@
-SRC := $(shell find {opskrift,tests,references} -name "*.py")
+SRC := $(shell find {ml-recipes,tests,references} -name "*.py")
 
 test:
 	@poetry run pytest --exitfirst --hypothesis-show-statistics
@@ -12,14 +12,7 @@ format:
 	@poetry run black --line-length 100 $(SRC)
 
 typecheck:
-	@poetry run mypy opskrift/ tests/
-
-build-docs:
-	rm -rfv docs/sources/reference
-	rm -rfv docs/sources/template
-	poetry run python3 docs/gen_references.py
-	poetry run mkdocs build --config-file docs/mkdocs.yml
-	(cd docs/build && git add ./ && git commit -m "Rebuild site." && git push -u origin site)
+	@poetry run mypy src/ tests/
 
 clean:
 	rm -rf **/__pycache__

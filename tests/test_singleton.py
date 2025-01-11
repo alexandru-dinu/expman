@@ -1,4 +1,4 @@
-from opskrift.singleton import Singleton
+from ml_recipes.singleton import Singleton
 
 
 def test_same_object():

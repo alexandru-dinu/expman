@@ -5,7 +5,7 @@ from typing import Any
 from hypothesis import given
 from hypothesis import strategies as st
 
-import opskrift.dict_utils as du
+import ml_recipes.dict_utils as du
 from tests.utils import build_tree
 
 
